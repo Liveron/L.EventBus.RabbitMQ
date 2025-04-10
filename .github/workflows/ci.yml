@@ -33,7 +33,7 @@ jobs:
     - name: Authanticate with GitHub Packages
       run: |
         dotnet nuget add source --username ${{ env.USERNAME }} --password ${{ secrets.NUGET_PACKAGES_ACCESS_TOKEN }} \
-        --name github "https://nuget.pkg.github.com/Liveron/index.json"
+        --store-password-in-clear-text --name github "https://nuget.pkg.github.com/Liveron/index.json"
     
     - name: Restore dependencies         
       run: dotnet restore
