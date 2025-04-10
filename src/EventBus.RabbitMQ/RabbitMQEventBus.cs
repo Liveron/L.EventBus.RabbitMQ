@@ -87,7 +87,8 @@ public class RabbitMQEventBus(
                 return Task.CompletedTask;
             };
 
-            await _consumerChannel.ExchangeDeclareAsync(exchange: EXCHANGE_NAME, type: "direct");
+            await _consumerChannel.ExchangeDeclareAsync(
+                exchange: EXCHANGE_NAME, type: "direct");
 
             await _consumerChannel.QueueDeclareAsync(
                 queue: _queueName,
@@ -112,7 +113,7 @@ public class RabbitMQEventBus(
                 await _consumerChannel.QueueBindAsync(
                     queue: _queueName,
                     exchange: EXCHANGE_NAME,
-                    routingKey: eventName);
+                    routingKey: eventName); 
             }
         }
         catch (Exception ex)

@@ -1,0 +1,47 @@
+name: CI
+
+on: 
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+env:
+  DOTNET_VERSION: "9.0"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: ${{ env.DOTNET_VERSION }}
+
+    - name: Cache NuGet packages
+      uses: actions/cache@v4
+      with:
+        path: ~/.nuget/packages
+        key: ${{ runner.os }}-nuget-${{ hashFiles('**/*.csproj') }}
+        restore-keys: |
+          ${{ runner.os }}-nuget-
+    
+    - name: Restore dependencies         
+      run: dotnet restore
+
+    - name: Build and publish
+      run: dotnet publish --configuration Release --no-restore --output ./publish
+
+    - name: Set artifact name
+      id: set-artifact-name
+      run: echo "name=publish-$(date +%s)" >> $GITHUB_OUTPUT
+    
+    - name: Upload artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: publish-output
+        path: ./publish
+        retention-days: 1

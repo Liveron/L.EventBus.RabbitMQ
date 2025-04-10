@@ -1,0 +1,5 @@
+services:
+  rabbit:
+    image: rabbitmq:4.0.7-alpine 
+    ports:
+      - 5672:5672 
