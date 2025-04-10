@@ -39,7 +39,9 @@ jobs:
       run: dotnet restore
 
     - name: Show ls
-      run: ls
+      run: |
+        ls
+        pwd
 
     - name: Build and publish
       run: dotnet publish --configuration Release --no-restore --output ./publish
