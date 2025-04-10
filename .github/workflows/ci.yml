@@ -38,6 +38,9 @@ jobs:
     - name: Restore dependencies         
       run: dotnet restore
 
+    - name: Show ls
+      run: ls
+
     - name: Build and publish
       run: dotnet publish --configuration Release --no-restore --output ./publish
 
