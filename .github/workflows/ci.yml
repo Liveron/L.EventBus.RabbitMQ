@@ -10,6 +10,7 @@ on:
 env:
   DOTNET_VERSION: "9.x"
   USERNAME: Liveron
+  DOCKER_COMPOSE_VERSION: v2.33.1
 
 jobs:
   build:
@@ -22,18 +23,28 @@ jobs:
       with:
         dotnet-version: ${{ env.DOTNET_VERSION }}
 
+    - name: Setup Docker Buildx
+      uses: docker/setup-buildx-action@v3
+      with:
+        version: ${{ env.DOCKER_COMPOSE_VERSION }}
+
     - name: Authenticate GitHub
       run: |  
        dotnet nuget add source https://nuget.pkg.github.com/Liveron/index.json \
-       --username ${{ env.USERNAME }} --password ${{ secrets.NUGET_PACKAGES_ACCESS_TOKEN }} \
-       --store-password-in-clear-text --name github
+        --username ${{ env.USERNAME }} \
+        --password ${{ secrets.NUGET_PACKAGES_ACCESS_TOKEN }} \
+        --store-password-in-clear-text \
+        --name github
         
-    
     - name: Restore dependencies         
       run: dotnet restore
 
     - name: Build
       run: dotnet build --configuration Release --no-restore
+
+    - name: Run docker-compose
+      run: |
+        docker-compose up --build --abort-on-container-exit
 
     - name: Test
       run: dotnet test --no-build  
