@@ -9,7 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{C7172B33-847
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{7F11320F-0A8B-4236-B941-36447B156179}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "L.EventBus.RabbitMQ.IntegrationTests", "L.EventBus.RabbitMQ.IntegrationTests\L.EventBus.RabbitMQ.IntegrationTests.csproj", "{DC820A5E-6CB3-4156-82E0-5D0DB122CF6C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "L.EventBus.RabbitMQ.IntegrationTests", "tests\L.EventBus.RabbitMQ.IntegrationTests\L.EventBus.RabbitMQ.IntegrationTests.csproj", "{DC820A5E-6CB3-4156-82E0-5D0DB122CF6C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docker-compose", "docker-compose", "{36D591C7-65C7-A0D1-1CBC-10CDE441BDC8}"
 	ProjectSection(SolutionItems) = preProject
